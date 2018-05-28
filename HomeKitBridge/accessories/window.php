@@ -49,18 +49,41 @@ class HAPAccessoryWindow extends HAPAccessoryBase
 	
 	public function writeCharacteristicTargetPosition($value)
     {
-        self::setDevice($this->data['TargetPosition'], $value);
+        $this->switchDevice($this->data['TargetPosition'], $value);
     }
 	
 	public function writeCharacteristicCurrentPosition($value)
     {
-        self::setDevice($this->data['CurrentPosition'], $value);
+        $this->switchDevice($this->data['CurrentPosition'], $value);
     }
 
     public function writeCharacteristicPositionState($value)
     {
-		self::setDevice($this->data['PositionState'], $value);
+	 $this->switchDevice($this->data['PositionState'], $value);
     }
+    
+    protected function switchDevice($variableID, $value)
+    {
+	 $targetVariable = IPS_GetVariable($variableID);
+ 
+	 if ($targetVariable['VariableCustomAction'] != '') {
+             $profileAction = $targetVariable['VariableCustomAction'];
+         } else {
+             $profileAction = $targetVariable['VariableAction'];
+         }
+	    
+         if ($profileAction < 10000) {
+             echo 'No action was defined!';
+ 
+             return;
+         }
+ 
+         if (IPS_InstanceExists($profileAction)) {
+             IPS_RunScriptText('IPS_RequestAction(' . var_export($profileAction, true) . ', ' . var_export(IPS_GetObject($variableID)['ObjectIdent'], true) . ', ' . var_export($value, true) . ');');
+         } elseif (IPS_ScriptExists($profileAction)) {
+             IPS_RunScriptEx($profileAction, ['VARIABLE' => $variableID, 'VALUE' => $value, 'SENDER' => 'VoiceControl']);
+         }
+     }
 }
 
 class HAPAccessoryConfigurationWindow
