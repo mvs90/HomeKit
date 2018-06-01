@@ -127,3 +127,4 @@ class HAPAccessoryConfigurationSecuritySystem
 }
 
 HomeKitManager::registerAccessory('SecuritySystem');
+
