@@ -138,3 +138,4 @@ class HAPAccessoryConfigurationLockMechanism
 }
 
 HomeKitManager::registerAccessory('LockMechanism');
+
