@@ -99,3 +99,4 @@ class HAPAccessoryConfigurationSpeaker
 }
 
 HomeKitManager::registerAccessory('Speaker');
+
