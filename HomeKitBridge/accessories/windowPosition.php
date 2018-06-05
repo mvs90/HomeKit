@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 class HAPAccessoryWindowPosition extends HAPAccessoryBase
 {
-    use HelperDimDevice;
+    use HelperSetDevice;
 
     public function __construct($data)
     {
@@ -31,7 +31,7 @@ class HAPAccessoryWindowPosition extends HAPAccessoryBase
 
     public function writeCharacteristicTargetPosition($value)
     {
-        $this->dimDevice($this->data['VariableID'], 100 - $value);
+        self::setDevice($this->data['VariableID'], $value);
     }
 
     public function notifyCharacteristicCurrentPosition()
@@ -43,7 +43,7 @@ class HAPAccessoryWindowPosition extends HAPAccessoryBase
 
     public function readCharacteristicCurrentPosition()
     {
-        return 100 - $this->getDimValue($this->data['VariableID']);
+        return $this->readCharacteristicCurrentPosition();
     }
 
     public function notifyCharacteristicPositionState()
