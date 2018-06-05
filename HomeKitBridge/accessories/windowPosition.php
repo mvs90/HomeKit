@@ -59,7 +59,7 @@ class HAPAccessoryWindowPosition extends HAPAccessoryBase
 
 class HAPAccessoryConfigurationWindowPosition
 {
-    use HelperDimDevice;
+    use HelperSetDevice;
 
     public static function getPosition()
     {
