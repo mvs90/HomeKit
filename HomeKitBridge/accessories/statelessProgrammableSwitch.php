@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-class HAPAccessoryAirQualitySensor extends HAPAccessoryBase
+class HAPAccessoryStatelessProgrammableSwitch extends HAPAccessoryBase
 {
     public function __construct($data)
     {
@@ -10,34 +10,36 @@ class HAPAccessoryAirQualitySensor extends HAPAccessoryBase
             $data,
             [
                 new HAPServiceAccessoryInformation(),
-                new HAPServiceAirQualitySensor()
+                new HAPServiceStatelessProgrammableSwitch()
             ]
         );
     }
 
-    public function notifyCharacteristicAirQuality()
+    public function notifyCharacteristicProgrammableSwitchEvent()
     {
         return [
             $this->data['VariableID']
         ];
     }
 
-    public function readCharacteristicAirQuality()
+    public function readCharacteristicProgrammableSwitchEvent()
     {
         return GetValue($this->data['VariableID']);
     }
 }
 
-class HAPAccessoryConfigurationAirQualitySensor
+class HAPAccessoryConfigurationStatelessProgrammableSwitch
 {
+    use HelperSetDevice;
+
     public static function getPosition()
     {
-        return 10;
+        return 300;
     }
 
     public static function getCaption()
     {
-        return 'Air Quality Sensor';
+        return 'Stateless Programmable Switch';
     }
 
     public static function getColumns()
@@ -66,7 +68,6 @@ class HAPAccessoryConfigurationAirQualitySensor
         if ($targetVariable['VariableType'] != 1 /* Integer */) {
             return 'Int required';
         }
-
         return 'OK';
     }
 
@@ -74,14 +75,14 @@ class HAPAccessoryConfigurationAirQualitySensor
     {
         return [
             'de' => [
-                'Air Quality Sensor'    => 'Luftgütesensor',
-                'VariableID'            => 'VariablenID',
-                'Variable missing'      => 'Variable fehlt',
-                'Int required'          => 'Int benötigt',
-                'OK'                    => 'OK'
+                'Stateless Programmable Switch'                => 'Zustandsloser programmierbarer Schalter',
+                'VariableID'                                   => 'VariablenID',
+                'Variable missing'                             => 'Variable fehlt',
+                'Int required'                                 => 'Int benötigt',
+                'OK'                                           => 'OK'
             ]
         ];
     }
 }
 
-HomeKitManager::registerAccessory('AirQualitySensor');
+HomeKitManager::registerAccessory('StatelessProgrammableSwitch');
