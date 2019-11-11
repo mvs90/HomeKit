@@ -46,15 +46,13 @@ class HAPAccessorySecuritySystemTest extends HAPAccessoryBase
     public function notifyCharacteristicSecuritySystemAlarmType()
     {
         return [
-            $this->data['status']
+            $this->data['alarm']
         ];
     }
 	
     public function readCharacteristicSecuritySystemAlarmType()
     {
-        if (GetValue(($this->data['status']))== 4) {
-            return HAPCharacteristicSecuritySystemAlarmType::Alarm;
-        }
+        return GetValue($this->data['alarm']);
 		
     }
     
@@ -110,6 +108,15 @@ class HAPAccessoryConfigurationSecuritySystemTest
                 'edit'  => [
                     'type' => 'SelectVariable'
                 ]
+            ],
+            [
+                'label' => 'alarm',
+                'name'  => 'alarm',
+                'width' => '150px',
+                'add'   => 0,
+                'edit'  => [
+                    'type' => 'SelectVariable'
+                ]
             ]
         ];
     }
@@ -140,6 +147,9 @@ class HAPAccessoryConfigurationSecuritySystemTest
             return 'Action required';
         }
         if (!IPS_VariableExists($data['sabotage'])) {
+            return 'Variable missing';
+        }
+        if (!IPS_VariableExists($data['alarm'])) {
             return 'Variable missing';
         }
         return 'OK';

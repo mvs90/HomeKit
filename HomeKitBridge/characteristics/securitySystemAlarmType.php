@@ -3,9 +3,7 @@
 declare(strict_types=1);
 
 class HAPCharacteristicSecuritySystemAlarmType extends HAPCharacteristic
-{
-    const Alarm = 1;
-    
+{   
     public function __construct()
     {
         parent::__construct(
