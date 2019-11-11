@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-class HAPAccessorySecuritySystem extends HAPAccessoryBase
+class HAPAccessorySecuritySystemTest extends HAPAccessoryBase
 {
     use HelperSetDevice;
 	
