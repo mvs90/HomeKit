@@ -94,10 +94,7 @@ class HAPAccessoryConfigurationLockMechanism
             return 'Variable missing';
         }
         $targetVariable = IPS_GetVariable($data['VariableID']);
-        if ($targetVariable['VariableType'] != 1 /* Integer */) {
-            return 'Int required';
-        }   
-	    if ($targetVariable['VariableCustomProfile'] != '') {
+	if ($targetVariable['VariableCustomProfile'] != '') {
             $profileName = $targetVariable['VariableCustomProfile'];
         } else {
             $profileName = $targetVariable['VariableProfile'];
