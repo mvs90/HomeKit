@@ -43,6 +43,21 @@ class HAPAccessorySecuritySystemTest extends HAPAccessoryBase
 		
     }
     
+    public function notifyCharacteristicSecuritySystemAlarmType()
+    {
+        return [
+            $this->data['status']
+        ];
+    }
+	
+    public function readCharacteristicSecuritySystemAlarmType()
+    {
+        if (GetValue(($this->data['status']))== 4) {
+            return HAPCharacteristicSecuritySystemAlarmType::Alarm;
+        }
+		
+    }
+    
     public function notifyCharacteristicSecuritySystemTargetState()
     {
         return [
