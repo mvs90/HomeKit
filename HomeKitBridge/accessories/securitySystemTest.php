@@ -61,13 +61,13 @@ class HAPAccessorySecuritySystemTest extends HAPAccessoryBase
     }
 }
 
-class HAPAccessoryConfigurationSecuritySystem
+class HAPAccessoryConfigurationSecuritySystemTest
 {
 	use HelperSetDevice;
 	
     public static function getPosition()
     {
-        return 92;
+        return 200;
     }
 	
     public static function getCaption()
