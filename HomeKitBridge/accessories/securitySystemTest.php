@@ -58,14 +58,18 @@ class HAPAccessorySecuritySystemTest extends HAPAccessoryBase
     
     public function notifyCharacteristicSecuritySystemTargetState()
     {
-        return [
+        if(GetValue(($this->data['status'])) < 4) {
+            return [
             $this->data['status']
-        ];
+            ];
+        }
     }
 	
     public function readCharacteristicSecuritySystemTargetState()
     {
-        return GetValue($this->data['status']);
+        if(GetValue(($this->data['status'])) < 4) {
+            return GetValue($this->data['status']);
+        }
     }
 	
     public function writeCharacteristicSecuritySystemTargetState($value)
