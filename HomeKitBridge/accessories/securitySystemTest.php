@@ -149,9 +149,6 @@ class HAPAccessoryConfigurationSecuritySystemTest
         if (!IPS_VariableExists($data['sabotage'])) {
             return 'Variable missing';
         }
-        if (!IPS_VariableExists($data['alarm'])) {
-            return 'Variable missing';
-        }
         return 'OK';
     }
 	
